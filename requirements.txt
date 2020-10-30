@@ -1,2 +1,7 @@
 streamlit_ace
 st-execbox
+bokeh
+matplotlib
+graphviz
+seaborn
+plotly
