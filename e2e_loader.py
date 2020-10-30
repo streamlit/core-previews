@@ -37,7 +37,6 @@ def select_script(auth={}):
         return render_script_selector(scripts)
 
 def render_script_selector(scripts):
-    print("how many times")
     placeholder_option = [{ "name": "Please select a script"}]
     options = placeholder_option + scripts
     selected_script = st.selectbox(

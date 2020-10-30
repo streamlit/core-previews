@@ -20,7 +20,6 @@ with col1:
 
 if selected_script:
     script = get_script(selected_script["download_url"])
-    # st.write("placeholder", script)
 else:
     script = """
 import streamlit as st
