@@ -1,7 +1,7 @@
 import requests
 import streamlit as st
 
-@st.cache(suppress_st_warning=True)
+@st.cache(suppress_st_warning=True, allow_output_mutation=True)
 def get_scripts(fork="streamlit", branch="develop", headers={}):
     response = requests.get(
         f"https://api.github.com/repos/{fork}/streamlit/contents/e2e/scripts?ref={branch}",
@@ -13,7 +13,7 @@ def get_scripts(fork="streamlit", branch="develop", headers={}):
     else:
         raise Error
 
-@st.cache()
+@st.cache(suppress_st_warning=True)
 def get_script(url):
     response = requests.get(url)
     e2e_script = response.text
@@ -37,8 +37,13 @@ def select_script(auth={}):
         return render_script_selector(scripts)
 
 def render_script_selector(scripts):
-    return st.selectbox(
+    print("how many times")
+    placeholder_option = [{ "name": "Please select a script"}]
+    options = placeholder_option + scripts
+    selected_script = st.selectbox(
         "Select E2E script",
-        options=scripts,
+        options= options,
         format_func=lambda x: x["name"]
     )
+    if selected_script and "download_url" in selected_script:
+        return selected_script
