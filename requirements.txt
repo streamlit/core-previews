@@ -1,3 +1,7 @@
 streamlit_ace
 st-execbox
+bokeh
+matplotlib
+graphviz
+seaborn
 https://core-previews.s3-us-west-2.amazonaws.com/pr-2299/streamlit-0.70.0-py2.py3-none-any.whl
