@@ -31,7 +31,7 @@ def set_auth():
 
 
 @st.cache(suppress_st_warning=True)
-def get_fork_from_pr(pr_number):
+def get_pr_info(pr_number):
     r = requests.get(
         f"https://api.github.com/repos/streamlit/streamlit/pulls/{pr_number}"
     )
