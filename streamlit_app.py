@@ -37,15 +37,11 @@ with col1:
     selected_script = select_script(branch, pr_number)
 
 if selected_script:
-    script = get_script(selected_script["download_url"])
-else:
-    script = """
-import streamlit as st
-
-st.header("Results")
-if st.button("Press me!"):
-    st.balloons()
-    """
+    if 'download_url' in selected_script:
+        script = get_script(selected_script["download_url"])
+    else:
+        with open(selected_script['path'], 'r', encoding='utf-8') as f:
+            script = f.read()
 
 st.header("Edit my source 👇")
 execbox(
