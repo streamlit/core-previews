@@ -68,10 +68,10 @@ def select_script(branch, pr_number, auth={}):
 
 
 def render_script_selector(scripts):
-    placeholder_option = [{"name": "Please select a script"}]
-    options = placeholder_option + scripts
-    selected_script = st.selectbox(
-        "Select E2E script", options=options, format_func=lambda x: x["name"]
+    default_script_option = [{"name": "Default script", "path": "./default_script.py"}]
+    options = default_script_option + scripts
+    return st.selectbox(
+        "Select E2E script",
+        options=options,
+        format_func=lambda x: x["name"],
     )
-    if selected_script and "download_url" in selected_script:
-        return selected_script
