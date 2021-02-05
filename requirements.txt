@@ -5,3 +5,4 @@ matplotlib
 graphviz
 seaborn
 plotly
+https://core-previews.s3-us-west-2.amazonaws.com/dependabot/npm_and_yarn/frontend/mapbox-gl-2.1.0-preview/streamlit-0.76.0-py2.py3-none-any.whl
