@@ -36,6 +36,9 @@ if pr_number is not None:
 with col1:
     selected_script = select_script(branch, pr_number)
 
+# fallback if things fail
+script = "import streamlit as st"
+
 if selected_script:
     if 'download_url' in selected_script:
         script = get_script(selected_script["download_url"])
