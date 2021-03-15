@@ -31,7 +31,7 @@ if pr_number is not None:
     col2.write(
         f"🔭 [View PR on Github](https://github.com/streamlit/streamlit/pull/{pr_number})"
     )
-    col2.write(f"🎡 [Download wheel]({s3_url})")
+col2.write(f"🎡 [Download wheel]({s3_url})")
 
 with col1:
     selected_script = select_script(branch, pr_number)
