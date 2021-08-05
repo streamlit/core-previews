@@ -5,3 +5,4 @@ matplotlib
 graphviz
 seaborn
 plotly
+https://core-previews.s3-us-west-2.amazonaws.com/tag-0.85.2.dev20210804/streamlit_nightly-0.85.2.dev20210804-py2.py3-none-any.whl
