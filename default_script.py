@@ -1,5 +1,5 @@
 import streamlit as st
+import pandas as pd
 
-st.header("Results")
-if st.button("Press me!"):
-    st.balloons()
+df = pd.DataFrame(["foo", "bar"])
+st.dataframe(df.dtypes)
