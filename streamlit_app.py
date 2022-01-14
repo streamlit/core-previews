@@ -7,7 +7,7 @@ with open("requirements.txt") as requirements:
     s3_url = requirements.read().split("\n")[-2]
 import re
 
-col1, padding, col2 = st.beta_columns([3, 0.1, 1])
+col1, padding, col2 = st.columns([3, 0.1, 1])
 
 
 def get_first_match(regex, s):
