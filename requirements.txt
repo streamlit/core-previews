@@ -5,3 +5,4 @@ matplotlib
 graphviz
 seaborn
 plotly
+https://core-previews.s3-us-west-2.amazonaws.com/make-time-input-work-with-keyboard-only-preview/streamlit-1.12.0-py2.py3-none-any.whl
