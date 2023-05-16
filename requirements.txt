@@ -5,3 +5,4 @@ matplotlib
 graphviz
 seaborn
 plotly
+https://core-previews.s3-us-west-2.amazonaws.com/feature/data-editor-refactoring-preview/streamlit-1.22.0-py2.py3-none-any.whl
