@@ -2,7 +2,7 @@ import requests
 import streamlit as st
 
 
-@st.cache(suppress_st_warning=True, allow_output_mutation=True)
+@st.cache_data
 def get_scripts(fork=None, branch=None, headers={}):
     if fork is None:
         fork = "streamlit"
@@ -17,7 +17,7 @@ def get_scripts(fork=None, branch=None, headers={}):
         return response.json()
 
 
-@st.cache(suppress_st_warning=True)
+@st.cache_data
 def get_script(url):
     response = requests.get(url)
     e2e_script = response.text
@@ -30,7 +30,7 @@ def set_auth():
         return {"Authorization": "token %s" % gh_token}
 
 
-@st.cache(suppress_st_warning=True)
+@st.cache_data
 def get_pr_info(pr_number):
     r = requests.get(
         f"https://api.github.com/repos/streamlit/streamlit/pulls/{pr_number}"
