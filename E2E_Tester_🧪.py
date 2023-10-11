@@ -21,6 +21,7 @@ def get_branch_info():
     core_preview_branch = "/".join(path_parts[:-1])
 
     branch = get_first_match("(.*)-preview", core_preview_branch)
+    branch = "develop" if branch == "nightly" else branch
     pr = get_first_match("pr-(\\d+)", core_preview_branch)
 
     return branch, pr
