@@ -6,3 +6,4 @@ graphviz
 seaborn
 plotly
 vega_datasets
+https://core-previews.s3-us-west-2.amazonaws.com/pr-9969/streamlit-1.40.2-py2.py3-none-any.whl
