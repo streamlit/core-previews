@@ -72,7 +72,9 @@ def render_script_selector(scripts):
     scripts = [
         script
         for script in scripts
-        if script["name"].endswith(".py") and not script["name"].endswith("_test.py")
+        if script["name"].endswith(".py")
+        and not script["name"].endswith("_test.py")
+        or script["name"] == "__init__.py"
     ]
 
     options = default_script_option + scripts

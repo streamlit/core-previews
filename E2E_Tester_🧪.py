@@ -60,8 +60,16 @@ if pr_number is not None:
     )
 col2.write(f"🎡 [Download wheel]({s3_url})")
 
+# Get script name from query parameter if available
+query_params = st.query_params.to_dict()
+script_from_query = query_params.get("script", None)
+
 with col1:
-    selected_script = select_script(branch, pr_number)
+    selected_script = select_script(branch, pr_number, default_script=script_from_query)
+
+    # If we have a script from query params, update the URL to match the selection
+    if selected_script and script_from_query != selected_script.get("name"):
+        st.query_params["script"] = selected_script.get("name", "")
 
 # fallback if things fail
 script = "import streamlit as st"
