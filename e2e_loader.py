@@ -43,7 +43,7 @@ def get_pr_info(pr_number):
         return None, None
 
 
-def select_script(branch, pr_number, auth={}):
+def select_script(branch, pr_number, auth={}, default_script=None):
     # From the S3 url, we can be passed either a branch ("<branch>-preview")
     # or a PR ("pr-<pr>"). (See get_branch_info() in streamlit_app.py.)
     #
@@ -63,10 +63,10 @@ def select_script(branch, pr_number, auth={}):
             scripts = get_scripts(fork=fork, branch=branch, headers=auth_headers)
 
     if scripts:
-        return render_script_selector(scripts)
+        return render_script_selector(scripts, default_script)
 
 
-def render_script_selector(scripts):
+def render_script_selector(scripts, default_script=None):
     default_script_option = [{"name": "Default script", "path": "./default_script.py"}]
     # Filter out all python scripts but ignore the test scripts (ending with _test.py)
     scripts = [
@@ -78,8 +78,18 @@ def render_script_selector(scripts):
     ]
 
     options = default_script_option + scripts
+
+    # Find the index of the default script if provided
+    default_index = 0
+    if default_script:
+        for i, script in enumerate(options):
+            if script["name"] == default_script:
+                default_index = i
+                break
+
     return st.selectbox(
         "Select e2e script",
         options=options,
         format_func=lambda x: x["name"],
+        index=default_index,
     )
