@@ -1,7 +1,9 @@
+from urllib.parse import urlparse
+
 import streamlit as st
 from execbox import execbox
-from e2e_loader import select_script, get_script
-from urllib.parse import urlparse
+
+from e2e_loader import get_script, select_script
 
 with open("requirements.txt") as requirements:
     s3_url = requirements.read().split("\n")[-2]
@@ -28,6 +30,29 @@ def get_branch_info():
     return branch, pr
 
 
+def strip_license_header(script_content):
+    """Remove license header comments from the beginning of the script."""
+    lines = script_content.split("\n")
+    first_non_comment_line = 0
+
+    # Find the first non-comment line
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if not stripped.startswith("#") and stripped:
+            first_non_comment_line = i
+            break
+
+    # Return script without the header comments
+    return "\n".join(lines[first_non_comment_line:])
+
+
+def remove_page_config(script_content):
+    """Remove st.set_page_config(...) calls from the script."""
+    # This regex matches st.set_page_config with any arguments and across multiple lines
+    pattern = re.compile(r"st\.set_page_config\s*\([^)]*\)", re.DOTALL)
+    return pattern.sub("", script_content)
+
+
 branch, pr_number = get_branch_info()
 if pr_number is not None:
     col2.write(
@@ -42,10 +67,14 @@ with col1:
 script = "import streamlit as st"
 
 if selected_script:
-    if 'download_url' in selected_script:
+    if "download_url" in selected_script:
         script = get_script(selected_script["download_url"])
+        # Strip license header from downloaded scripts
+        script = strip_license_header(script)
+        # Remove st.set_page_config calls
+        script = remove_page_config(script)
     else:
-        with open(selected_script['path'], 'r', encoding='utf-8') as f:
+        with open(selected_script["path"], "r", encoding="utf-8") as f:
             script = f.read()
 
 st.header("Edit my source 👇")
