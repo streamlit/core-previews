@@ -74,7 +74,7 @@ def render_script_selector(scripts, default_script=None):
         for script in scripts
         if script["name"].endswith(".py")
         and not script["name"].endswith("_test.py")
-        or not script["name"].endswith("__.py")
+        and not script["name"].endswith("__.py")
     ]
 
     options = default_script_option + scripts
