@@ -77,7 +77,7 @@ if selected_script:
         with open(selected_script["path"], "r", encoding="utf-8") as f:
             script = f.read()
 
-st.header("Edit my source 👇")
+st.subheader("Edit my source :material/edit_square:")
 execbox(
     script,
     autorun=True,
