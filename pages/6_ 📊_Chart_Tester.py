@@ -1,11 +1,10 @@
-import streamlit as st
 import altair as alt
 import graphviz
 import numpy as np
 import pandas as pd
 import plotly.figure_factory as ff
 import pydeck as pdk
-from bokeh.plotting import figure
+import streamlit as st
 
 st.title("📊 Chart Tester")
 st.write("Testing all chart elements in one place.")
@@ -68,9 +67,6 @@ y = [6, 7, 2, 4, 5]
 p = figure(title="simple line example", x_axis_label="x", y_axis_label="y")
 
 p.line(x, y, legend_label="Trend", line_width=2)
-st.write("**Bokeh Chart:**")
-st.bokeh_chart(p, use_container_width=True)
-
 
 df = pd.DataFrame(
     np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4], columns=["lat", "lon"]

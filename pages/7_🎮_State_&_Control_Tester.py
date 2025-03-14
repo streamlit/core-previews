@@ -31,10 +31,10 @@ with st.form(key="other", clear_on_submit=True):
 st.caption("Clear on Submit Form Answer:")
 st.write(slider_input)
 
-st.write("**Experimental Rerun:**")
+st.write("**Rerun:**")
 clicked = st.button("Trigger Rerun")
 if clicked:
-    st.experimental_rerun()
+    st.rerun()
 
 st.stop()
 st.write("🚧 :red[if you see this, st.stop does not work!]")

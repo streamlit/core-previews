@@ -10,7 +10,7 @@ def get_scripts(fork=None, branch=None, headers={}):
         branch = "develop"
 
     response = requests.get(
-        f"https://api.github.com/repos/{fork}/streamlit/contents/e2e/scripts?ref={branch}",
+        f"https://api.github.com/repos/{fork}/streamlit/contents/e2e_playwright?ref={branch}",
         headers=headers,
     )
     if response.status_code == 200:
@@ -25,8 +25,7 @@ def get_script(url):
 
 
 def set_auth():
-    gh_token = st.text_input("Enter your GH token", key="key")
-    if gh_token:
+    if gh_token := st.text_input("Enter your GH token", key="key"):
         return {"Authorization": "token %s" % gh_token}
 
 
@@ -40,7 +39,7 @@ def get_pr_info(pr_number):
         fork = body["head"]["user"]["login"]
         branch = body["head"]["ref"]
         return fork, branch
-    except:
+    except Exception:
         return None, None
 
 
@@ -58,7 +57,7 @@ def select_script(branch, pr_number, auth={}):
     scripts = None
     try:
         scripts = get_scripts(fork=fork, branch=branch, headers=auth)
-    except Exception as e:
+    except Exception:
         auth_headers = set_auth()
         if auth_headers:
             scripts = get_scripts(fork=fork, branch=branch, headers=auth_headers)
@@ -69,9 +68,16 @@ def select_script(branch, pr_number, auth={}):
 
 def render_script_selector(scripts):
     default_script_option = [{"name": "Default script", "path": "./default_script.py"}]
+    # Filter out all python scripts but ignore the test scripts (ending with _test.py)
+    scripts = [
+        script
+        for script in scripts
+        if script["name"].endswith(".py") and not script["name"].endswith("_test.py")
+    ]
+
     options = default_script_option + scripts
     return st.selectbox(
-        "Select E2E script",
+        "Select e2e script",
         options=options,
         format_func=lambda x: x["name"],
     )
