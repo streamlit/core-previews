@@ -6,3 +6,4 @@ seaborn
 plotly
 vega_datasets
 scipy
+https://core-previews.s3-us-west-2.amazonaws.com/nightly-preview/streamlit_nightly-1.43.3.dev20250314-py3-none-any.whl
