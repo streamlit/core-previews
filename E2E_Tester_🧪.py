@@ -9,7 +9,7 @@ with open("requirements.txt") as requirements:
     s3_url = requirements.read().split("\n")[-2]
 import re
 
-col1, padding, col2 = st.columns([3, 0.1, 1])
+col1, col2 = st.columns([4, 1], gap="medium")
 
 
 def get_first_match(regex, s):
@@ -61,7 +61,7 @@ st.write(
     f"🎡 [Download wheel]({s3_url})",
 )
 
-if col2.button(":material/refresh: Reload scripts"):
+if col2.button(":material/refresh:", use_container_width=True):
     get_script.clear()
     get_scripts.clear()
 
