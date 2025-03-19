@@ -17,7 +17,7 @@ def get_scripts(fork=None, branch=None, headers={}):
         return response.json()
 
 
-@st.cache_data(ttl=10 * 60)  # 10 minutes
+@st.cache_data(ttl=15 * 60)  # 15 minutes
 def get_script(url):
     response = requests.get(url)
     e2e_script = response.text
