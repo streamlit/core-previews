@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 import streamlit as st
 from execbox import execbox
 
-from e2e_loader import get_script, select_script
+from e2e_loader import get_script, get_scripts, select_script
 
 with open("requirements.txt") as requirements:
     s3_url = requirements.read().split("\n")[-2]
@@ -54,11 +54,16 @@ def remove_page_config(script_content):
 
 
 branch, pr_number = get_branch_info()
-if pr_number is not None:
-    col2.write(
-        f"🔭 [View PR on Github](https://github.com/streamlit/streamlit/pull/{pr_number})"
-    )
-col2.write(f"🎡 [Download wheel]({s3_url})")
+st.write(
+    f"🔭 [View PR on Github](https://github.com/streamlit/streamlit/pull/{pr_number})"
+    if pr_number is not None
+    else "",
+    f"🎡 [Download wheel]({s3_url})",
+)
+
+if col2.button(":material/refresh: Reload scripts"):
+    get_script.clear()
+    get_scripts.clear()
 
 # Get script name from query parameter if available
 query_params = st.query_params.to_dict()
