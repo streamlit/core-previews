@@ -2,7 +2,7 @@ import requests
 import streamlit as st
 
 
-@st.cache_data
+@st.cache_data(ttl=20 * 60)  # 20 minutes
 def get_scripts(fork=None, branch=None, headers={}):
     if fork is None:
         fork = "streamlit"
@@ -17,7 +17,7 @@ def get_scripts(fork=None, branch=None, headers={}):
         return response.json()
 
 
-@st.cache_data
+@st.cache_data(ttl=10 * 60)  # 10 minutes
 def get_script(url):
     response = requests.get(url)
     e2e_script = response.text
