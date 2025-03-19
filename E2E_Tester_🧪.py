@@ -53,7 +53,7 @@ def remove_page_config(script_content):
 
 branch, pr_number = get_branch_info()
 st.write(
-    f"🔭 [View PR on Github](https://github.com/streamlit/streamlit/pull/{pr_number})  "
+    f"🔭 [View PR on Github](https://github.com/streamlit/streamlit/pull/{pr_number}) - "
     if pr_number is not None
     else "",
     f"🎡 [Download wheel]({s3_url})",
