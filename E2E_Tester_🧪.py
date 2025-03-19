@@ -9,7 +9,7 @@ with open("requirements.txt") as requirements:
     s3_url = requirements.read().split("\n")[-2]
 import re
 
-col1, col2 = st.columns([4, 1], gap="medium")
+col1, col2 = st.columns([4, 1], vertical_alignment="bottom")
 
 
 def get_first_match(regex, s):
