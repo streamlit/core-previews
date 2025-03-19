@@ -9,8 +9,6 @@ with open("requirements.txt") as requirements:
     s3_url = requirements.read().split("\n")[-2]
 import re
 
-col1, col2 = st.columns([4, 1], vertical_alignment="bottom")
-
 
 def get_first_match(regex, s):
     match = re.search(regex, s)
@@ -60,6 +58,8 @@ st.write(
     else "",
     f"🎡 [Download wheel]({s3_url})",
 )
+
+col1, col2 = st.columns([6, 1], vertical_alignment="bottom", gap="small")
 
 if col2.button(":material/refresh:", use_container_width=True):
     get_script.clear()
