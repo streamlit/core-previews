@@ -2,7 +2,7 @@ import requests
 import streamlit as st
 
 
-@st.cache_data(ttl=20 * 60)  # 20 minutes
+@st.cache_data(ttl=2 * 60 * 60)  # 2 hours
 def get_scripts(fork=None, branch=None, headers={}):
     if fork is None:
         fork = "streamlit"
@@ -15,10 +15,13 @@ def get_scripts(fork=None, branch=None, headers={}):
     )
     if response.status_code == 200:
         return response.json()
+    else:
+        print("Failed to get scripts", response.status_code, response.text)
+        return []
 
 
-@st.cache_data(ttl=15 * 60)  # 15 minutes
-def get_script(url):
+@st.cache_data(ttl=2 * 60 * 60)  # 2 hours
+def get_script(url: str) -> str:
     response = requests.get(url)
     e2e_script = response.text
     return e2e_script
@@ -57,7 +60,8 @@ def select_script(branch, pr_number, auth={}, default_script=None):
     scripts = None
     try:
         scripts = get_scripts(fork=fork, branch=branch, headers=auth)
-    except Exception:
+    except Exception as e:
+        print("Failed to get scripts", e)
         auth_headers = set_auth()
         if auth_headers:
             scripts = get_scripts(fork=fork, branch=branch, headers=auth_headers)
