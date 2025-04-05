@@ -90,9 +90,8 @@ if selected_script:
         with open(selected_script["path"], "r", encoding="utf-8") as f:
             script = f.read()
 
-st.subheader("Edit my source :material/edit_square:")
-
-if not st.secrets.get("disable_editor", False):
+if not bool(st.secrets.get("disable_editor", False)):
+    st.subheader("Edit my source :material/edit_square:")
     execbox(
         script,
         autorun=True,
