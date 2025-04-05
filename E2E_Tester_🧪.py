@@ -91,9 +91,11 @@ if selected_script:
             script = f.read()
 
 st.subheader("Edit my source :material/edit_square:")
-execbox(
-    script,
-    autorun=True,
-    line_numbers=True,
-    height=300,
-)
+
+if not st.secrets.get("disable_editor", False):
+    execbox(
+        script,
+        autorun=True,
+        line_numbers=True,
+        height=300,
+    )
