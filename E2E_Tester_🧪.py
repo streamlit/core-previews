@@ -98,3 +98,6 @@ if not bool(st.secrets.get("disable_editor", False)):
         line_numbers=True,
         height=300,
     )
+else:
+    # Run script directly
+    exec(script)
