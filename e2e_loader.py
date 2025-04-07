@@ -16,7 +16,7 @@ def get_scripts(fork=None, branch=None, headers={}):
     if response.status_code == 200:
         return response.json()
     else:
-        print("Failed to get scripts", response.status_code, response.text)
+        print("Failed to get scripts", response.status_code, response.text, flush=True)
         return []
 
 
@@ -47,7 +47,6 @@ def get_pr_info(pr_number):
 
 
 def select_script(branch, pr_number, auth={}, default_script=None):
-    print("Hello world", flush=True)
     # From the S3 url, we can be passed either a branch ("<branch>-preview")
     # or a PR ("pr-<pr>"). (See get_branch_info() in streamlit_app.py.)
     #
@@ -61,15 +60,19 @@ def select_script(branch, pr_number, auth={}, default_script=None):
     scripts = None
     try:
         scripts = get_scripts(fork=fork, branch=branch, headers=auth)
-        print("scripts", scripts)
     except Exception as e:
-        print("Failed to get scripts", e)
+        print("Failed to get scripts", e, flush=True)
+        scripts = None
+
+    if not scripts:
         auth_headers = set_auth()
         if auth_headers:
             scripts = get_scripts(fork=fork, branch=branch, headers=auth_headers)
 
     if scripts:
         return render_script_selector(scripts, default_script)
+    else:
+        return None
 
 
 def render_script_selector(scripts, default_script=None):
