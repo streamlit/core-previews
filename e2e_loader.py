@@ -47,6 +47,7 @@ def get_pr_info(pr_number):
 
 
 def select_script(branch, pr_number, auth={}, default_script=None):
+    print("Hello world", flush=True)
     # From the S3 url, we can be passed either a branch ("<branch>-preview")
     # or a PR ("pr-<pr>"). (See get_branch_info() in streamlit_app.py.)
     #
