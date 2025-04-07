@@ -16,7 +16,7 @@ def get_scripts(fork=None, branch=None, headers={}):
     if response.status_code == 200:
         return response.json()
     else:
-        print("Failed to get scripts", response.status_code, response.text)
+        print("Failed to get scripts", response.status_code, response.text, flush=True)
         return []
 
 
@@ -61,13 +61,18 @@ def select_script(branch, pr_number, auth={}, default_script=None):
     try:
         scripts = get_scripts(fork=fork, branch=branch, headers=auth)
     except Exception as e:
-        print("Failed to get scripts", e)
+        print("Failed to get scripts", e, flush=True)
+        scripts = None
+
+    if not scripts:
         auth_headers = set_auth()
         if auth_headers:
             scripts = get_scripts(fork=fork, branch=branch, headers=auth_headers)
 
     if scripts:
         return render_script_selector(scripts, default_script)
+    else:
+        return None
 
 
 def render_script_selector(scripts, default_script=None):
