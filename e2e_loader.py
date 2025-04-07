@@ -60,6 +60,7 @@ def select_script(branch, pr_number, auth={}, default_script=None):
     scripts = None
     try:
         scripts = get_scripts(fork=fork, branch=branch, headers=auth)
+        print("scripts", scripts)
     except Exception as e:
         print("Failed to get scripts", e)
         auth_headers = set_auth()
