@@ -6,3 +6,4 @@ seaborn
 plotly
 vega_datasets
 scipy
+streamlit-pdf
