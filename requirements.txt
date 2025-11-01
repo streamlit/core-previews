@@ -7,3 +7,4 @@ plotly
 vega_datasets
 scipy
 streamlit-pdf
+https://core-previews.s3-us-west-2.amazonaws.com/nightly-preview/streamlit_nightly-1.51.1.dev20251031-py3-none-any.whl
